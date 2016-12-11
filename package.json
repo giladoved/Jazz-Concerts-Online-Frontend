@@ -1,0 +1,15 @@
+{
+  "name": "jazz-concerts-live",
+  "version": "1.0.0",
+  "description": "watch jazz live concerts online",
+  "main": "index.js",
+  "dependencies": {
+    "normalize.css": "^5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gilad Oved",
+  "license": "ISC"
+}

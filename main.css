@@ -1,0 +1,67 @@
+header {
+	background: #999999;
+	padding: 5px;
+	padding-bottom: 15px;
+}
+
+header h1 {
+	text-align: center;
+	margin: 5px 0;
+}
+
+header h2 {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+nav {
+	margin-bottom: 25px;
+}
+
+nav ul {
+	list-style-type: none;
+	text-align: center;
+	padding-left: 0;
+}
+
+nav ul li {
+	display: inline;
+	margin: 0 5px;
+}
+
+li a:hover {
+	background: #000;
+    background-color: #999999;
+}
+
+main {
+	text-align: center;
+}
+
+.featured {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.description {
+	margin-bottom: 20px;
+}
+
+.description h4 {
+	display: inline-block;
+}
+
+.description p {
+	display: inline-block;
+}
+
+.description ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.description ul li {
+	display: inline;
+	margin: 0 10px;
+}
