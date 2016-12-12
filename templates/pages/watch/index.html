@@ -1,18 +1,3 @@
-<div class="watch wrapper" ng-controller="watchCtrl as watch">
-	<h3>{{watch.concert.artist}} Live at {{featured.concert.venue}} {{featured.concert.year}}</h3>
-	<div class="video embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" width="900" height="500" ng-src="{{featured.concert.url}}" frameborder="0" allowfullscreen></iframe></div>
-	<div class="description">
-		<h4> Artists: </h4>
-		<ul>
-		    <li ng-repeat="artist in featured.concert.artists">{{artist}}</li>
-		</ul>
-		<div class="row">
-			<div class="col-sm-6"> <h4> Year: </h4><p> {{featured.concert.year}} </p> </div>
-			<div class="col-sm-6"> <h4> Venue: </h4><p> {{featured.concert.venue}} </p> </div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6"> <h4> Festival: </h4><p> {{featured.concert.festival}} </p> </div>
-			<div class="col-sm-6"> <h4> City: </h4><p> {{featured.concert.city}} </p> </div>
-		</div>
-	</div>
+<div class="watch wrapper">
+	<watch-component concert="watch"></watch-component>
 </div>

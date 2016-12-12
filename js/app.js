@@ -10,11 +10,14 @@
 	.config(function($routeProvider) {
 	  $routeProvider
 	  .when('/watch/:id', {
-	    templateUrl : '/templates/pages/watch/index.html'
+	    templateUrl : '/templates/pages/watch/index.html',
+	    controller: 'WatchCtrl',
+	    controllerAs: 'watch'
 	  })
 	  .when('/list/:type/:name', {
 	    templateUrl : '/templates/pages/list/index.html',
-	    controller: 'ListCtrl'
+	    controller: 'ListCtrl',
+	    controllerAs: 'list'
 	  })
 	  .when('/', {
 	  	templateUrl: '/templates/pages/home/index.html'
@@ -29,8 +32,25 @@
 		this.name = $routeParams.name;
 	});
 
-	app.controller('FeaturedCtrl', function() {
-		this.concert = featured;
+	app.controller('WatchCtrl', function($scope, $routeParams) {
+		var id = $routeParams.id;
+		$scope.id = id;
+		// $scope.concert = getConcertById($routeParams.id);
+
+		$scope.concert = {
+				artist: "Robert Glasper Trio",
+				artists: ["Robert Glasper", "Derick Hodge", "Chris Dave"],
+				year: "2012",
+				festival: "Jazz a la Villette Festival",
+				venue: "Cite de la Musique",
+				city: "Paris, France",
+				id: id,
+				url: "http://www.youtube.com/embed/" + id
+			};
+	});
+
+	app.controller('FeaturedCtrl', function($scope) {
+		$scope.concert = featured;
 	});
 
 	app.controller('VenuesCtrl', function() {
@@ -43,6 +63,13 @@
 
 	app.controller('RecentsCtrl', function() {
 		this.recents = recents;
+	});
+
+
+	app.directive('watchComponent', function() {
+		return {
+			templateUrl: 'templates/directives/watch.html'
+		}
 	});
 
 	var featured = {
