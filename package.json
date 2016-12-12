@@ -6,9 +6,15 @@
   "dependencies": {
     "normalize.css": "^5.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1"
+  },
   "scripts": {
-    "test" : "http-server -c-1"
+    "test": ""
   },
   "author": "Gilad Oved",
   "license": "ISC"

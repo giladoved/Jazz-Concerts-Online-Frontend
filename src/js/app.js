@@ -10,17 +10,17 @@
 	.config(function($routeProvider) {
 	  $routeProvider
 	  .when('/watch/:id', {
-	    templateUrl : '/templates/pages/watch/index.html',
+	    templateUrl : '/src/templates/pages/watch/index.html',
 	    controller: 'WatchCtrl',
 	    controllerAs: 'watch'
 	  })
 	  .when('/list/:type/:name', {
-	    templateUrl : '/templates/pages/list/index.html',
+	    templateUrl : '/src/templates/pages/list/index.html',
 	    controller: 'ListCtrl',
 	    controllerAs: 'list'
 	  })
 	  .when('/', {
-	  	templateUrl: '/templates/pages/home/index.html'
+	  	templateUrl: '/src/templates/pages/home/index.html'
 	  })
 	  .otherwise({
 	  	redirectTo: '/'
@@ -45,7 +45,7 @@
 				venue: "Cite de la Musique",
 				city: "Paris, France",
 				id: id,
-				url: "http://www.youtube.com/embed/" + id
+				url: "http://www.youtube.com/embed/" + id + "?showinfo=0&rel=0"
 			};
 	});
 
@@ -68,8 +68,8 @@
 
 	app.directive('watchComponent', function() {
 		return {
-			templateUrl: 'templates/directives/watch.html'
-		}
+			templateUrl: '/src/templates/directives/watch.html'
+		};
 	});
 
 	var featured = {
@@ -80,7 +80,7 @@
 		venue: "Cite de la Musique",
 		city: "Paris, France",
 		id: "kScYtiy4PEs",
-		url: "http://www.youtube.com/embed/kScYtiy4PEs"
+		url: "http://www.youtube.com/embed/kScYtiy4PEs?showinfo=0&rel=0"
 	};
 
 	var venues = [

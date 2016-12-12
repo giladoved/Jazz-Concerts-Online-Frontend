@@ -1,0 +1,27 @@
+<h3>{{concert.artist}} Live at {{concert.venue}} {{concert.year}}</h3>
+<div class="video embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" width="900" height="500" ng-src="{{concert.url}}" frameborder="0" allowfullscreen></iframe></div>
+<div class="description">
+	<div class="row">
+  		<div class="info col-sm-7">
+  			<h4> Artists: </h4>
+			<ul>
+			    <li ng-repeat="artist in concert.artists">{{artist}}</li>
+			</ul>
+			<div><h4> Year: </h4><p> {{concert.year}} </p></div>
+			<div><h4> Venue: </h4><p> {{concert.venue}} </p></div>
+			<div><h4> Festival: </h4><p> {{concert.festival}} </p></div>
+			<div><h4> City: </h4><p> {{concert.city}} </p></div>
+  		</div>
+  		<div class="tracklist col-sm-5">
+  			<h4> Tracklist: </h4>
+  			<ul>
+  				<li> <a href="#">00:00</a> - Billie's Bounce</li>
+  				<li> <a href="#">02:11</a> - Billie's Bounce</li>
+  				<li> <a href="#">05:16</a> - Billie's Bounce</li>
+  				<li> <a href="#">07:42</a> - Billie's Bounce</li>
+  				<li> <a href="#">09:11</a> - Billie's Bounce</li>
+  				<li> <a href="#">13:40</a> - Billie's Bounce</li>
+  			</ul>
+  		</div>
+  	</div>
+</div>
