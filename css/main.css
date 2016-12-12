@@ -19,6 +19,12 @@ nav {
 	margin-bottom: 25px;
 }
 
+ul {
+	list-style-type: none;
+	text-align: center;
+	padding-left: 0;
+}
+
 nav ul {
 	list-style-type: none;
 	text-align: center;
@@ -30,16 +36,13 @@ nav ul li {
 	margin: 0 5px;
 }
 
-li a:hover {
+nav ul li a:hover {
 	background: #000;
     background-color: #999999;
 }
 
-main {
+div.wrapper {
 	text-align: center;
-}
-
-.featured {
 	width: 50%;
 	margin: 0 auto;
 }
