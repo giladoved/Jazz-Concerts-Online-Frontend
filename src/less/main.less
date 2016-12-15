@@ -1,14 +1,17 @@
+@dark-blue: #051640;
+@light-gray: #DEE1EA;
+
 body {
 	font-family: Helvetica, "Times New Roman", serif;
-	background: #DEE1EA;
-	color: #051640;
+	background: @light-gray;
+	color: @dark-blue;
 }
 
 header {
-	background: #051640;
-	color: #DEE1EA;
+	background: @dark-blue;
+	color: @light-gray;
 	padding: 5px 5px 15px 5px;
-	margin-bottom: 10px;
+	margin-bottom: 18px;
 
 	h1 {
 		text-align: center;
@@ -22,7 +25,7 @@ header {
 }
 
 nav {
-	margin-bottom: 25px;
+	margin-bottom: 18px;
 
 	ul {
 		list-style-type: none;
@@ -32,12 +35,28 @@ nav {
 		li {
 			display: inline;
 			margin: 0 5px;
+			padding: 10px;
+			border: 1px solid @dark-blue;
+			border-radius: 8px;
+			background: @dark-blue;
 
-			a:hover {
-				background-color: #999999;
+			a {
+				color: @light-gray;
+			}
+		}
+		li:hover {
+			background-color: @light-gray;
+			a {
+				color: @dark-blue;
 			}
 		}
 	}
+}
+
+hr {
+	margin: 0 auto;
+	width: 50%;
+	border-top: 1px solid @dark-blue;
 }
 
 .wrapper {
