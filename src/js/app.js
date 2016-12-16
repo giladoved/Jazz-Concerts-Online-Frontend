@@ -32,6 +32,31 @@
 		this.name = $routeParams.name;
 	});
 
+	app.controller('TracklistCtrl', function($scope) {
+		$scope.jumpVideo = function(timestamp) {
+			var timeParts = timestamp.split(':');
+			var hours, minutes, seconds;
+
+			if (timeParts.length == 3) {
+				hours = timeParts[0];
+				minutes = timeParts[1];
+				seconds = timeParts[2];
+			} else {
+				minutes = timeParts[0];
+				seconds = timeParts[1];
+			}
+
+			var totalSeconds = 0;
+			if (timeParts.length == 3) {
+				totalSeconds += hours * 60 * 60;
+			}
+			totalSeconds += minutes * 60;
+			totalSeconds += seconds;
+
+			console.log("Seeking to " + totalSeconds);
+		}
+	});
+
 	app.controller('WatchCtrl', function($scope, $routeParams) {
 		var id = $routeParams.id;
 		$scope.id = id;
