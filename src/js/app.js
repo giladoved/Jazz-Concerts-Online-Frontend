@@ -49,20 +49,28 @@
 			};
 	});
 
-	app.controller('FeaturedCtrl', function($scope) {
-		$scope.concert = featured;
+	app.controller('FeaturedCtrl', function($scope, $http) {
+		$http.get('/featured').then((res) => {
+			$scope.concert = res.data;
+		});
 	});
 
-	app.controller('VenuesCtrl', function() {
-		this.venues = venues;
+	app.controller('VenuesCtrl', function($http) {
+		$http.get('/venues').then((res) => {
+			this.venues = res.data;
+		});
 	});
 
-	app.controller('GenresCtrl', function() {
-		this.genres = genres;
+	app.controller('GenresCtrl', function($http) {
+		$http.get('/genres').then((res) => {
+			this.genres = res.data;
+		});
 	});
 
-	app.controller('RecentsCtrl', function() {
-		this.recents = recents;
+	app.controller('RecentsCtrl', function($http) {
+		$http.get('/recents').then((res) => {
+			this.recents = res.data;
+		});
 	});
 
 
@@ -71,43 +79,4 @@
 			templateUrl: '/src/templates/directives/watch.html'
 		};
 	});
-
-	var featured = {
-		artist: "Robert Glasper Trio",
-		artists: ["Robert Glasper", "Derick Hodge", "Chris Dave"],
-		year: "2012",
-		festival: "Jazz a la Villette Festival",
-		venue: "Cite de la Musique",
-		city: "Paris, France",
-		id: "kScYtiy4PEs",
-		url: "http://www.youtube.com/embed/kScYtiy4PEs?showinfo=0&rel=0"
-	};
-
-	var venues = [
-		{
-			venue: "Village Vanguard",
-			description: "NYC - lit since 1920s"
-		},
-		{
-			venue: "55 Bar",
-			description: "cozy venue blah blah"
-		}
-	];
-
-	var genres = [ "Swing", "Hard-Bop", "Fusion" ];
-
-	var recents = [
-	{
-		artist: "Snarky Puppy",
-		venue: "Village Vanguard",
-		year: "2012",
-		id: "kScYtiy4PEs"
-	},
-	{
-		artist: "Chris Potter",
-		venue: "55 Bar",
-		year: "2010",
-		id: "kScYtiy4PEs"
-	}];
-
 })();
