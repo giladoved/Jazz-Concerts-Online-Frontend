@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="App">
+<html>
 <head>
 	<title>Jazz Concerts Live</title>
 
@@ -11,12 +11,12 @@
 	<link rel="stylesheet" href="public/assets/stylesheets/main.css" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js"></script>
+	<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="src/js/app.js"></script>
 
 	<base href="/">
 </head>
-<body>
+<body ng-app="App">
 	<header>
 		<h1>Jazz Concerts Live</h1>
 		<h2>Collection of best live jazz performances!</h2>
@@ -24,14 +24,14 @@
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Random</a></li>
+			<li><a href="/">About</a></li>
+			<li><a href="/">Random</a></li>
 		</ul>
 	</nav>
 
 	<hr>
 
-	<div ng-view></div>
+	<div ui-view></div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

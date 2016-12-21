@@ -12,10 +12,10 @@
 			<div ng-show="concert.festival"><h4> Festival: </h4><p> {{concert.festival}} </p></div>
 			<div ng-show="concert.city"><h4> City: </h4><p> {{concert.city}} </p></div>
   		</div>
-  		<div class="tracklist col-sm-5">
+  		<div class="tracklist col-sm-5"  ng-controller="TracklistCtrl as tracklist" ng-show="concert.tracklist">
   			<h4> Tracklist: </h4>
-  			<ul ng-controller="TracklistCtrl as tracklist">
-  				<li ng-repeat="trackItem in concert.tracklist"> <a href="#" ng-click="jumpVideo(trackItem[0])">{{trackItem[0]}}</a> - {{trackItem[1]}}</li>
+  			<ul>
+  				<li ng-repeat="trackItem in concert.tracklist"> <a ng-click="jumpVideo(trackItem[0])">{{trackItem[0]}}</a> - {{trackItem[1]}}</li>
   			</ul>
   		</div>
   	</div>

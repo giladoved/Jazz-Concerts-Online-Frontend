@@ -9,7 +9,7 @@
 		<section class="venue" ng-controller="VenuesCtrl as venues">
 			<h2> Browse by venue </h2>
 			<article ng-repeat="venue in venues.venues">
-				<h3><a href="/list/venue/{{venue.venue}}"> {{venue.venue}} </a></h3>
+				<h3><a ui-sref="list({type: 'venue', name: (venue.venue | lowercase)})"> {{venue.venue}} </a></h3>
 				<h5> {{venue.description}} </h5>
 			</article>
 		</section>
@@ -17,13 +17,13 @@
 		<section class="genre" ng-controller="GenresCtrl as genres">
 			<h2> Browse by genre </h2>
 			<article>
-				<h3 ng-repeat="genre in genres.genres"><a href="/list/genre/{{genre}}"> {{genre}} </a></h3>
+				<h3 ng-repeat="genre in genres.genres"><a ui-sref="list({type: 'genre', name: (genre | lowercase)})"> {{genre}} </a></h3>
 			</article>
 		</section>
 
 		<section class="recent" ng-controller="RecentsCtrl as recents">
 			<h2> Recently Added </h2>
-			<h3 ng-repeat="recent in recents.recents"><a href="/watch/{{recent.id}}">{{recent.artist}} Live at {{recent.venue}} {{recent.year}}</a></h3>
+			<h3 ng-repeat="recent in recents.recents"><a ui-sref="watch({id: recent.id})">{{recent.artist}} Live at {{recent.venue}} {{recent.year}}</a></h3>
 		</section>
 	</div>
 </div>

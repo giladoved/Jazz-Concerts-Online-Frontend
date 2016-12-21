@@ -1,8 +1,21 @@
 <div class="list wrapper">
-	<h3> {{list.name}} </h3>
-	<ul>
-		<li><a href="/watch/7gu8q_fJeVU"> Snarky Puppy live at Java Jazz Festival 2014 </a></li>
-		<li><a href="/watch/8cpwaq7CxD4"> Jaco Pastorius live at Montreal Jazz Festival 1982 </a></li>
-		<li><a href="/watch/ehXUyW4-hA8"> Weather Report live in Offenbach 1978 </a></li>
-	</ul>
+	<div>
+	  <input type="text" ng-model="search"/>
+	  <select ng-model="orderBy">
+	    <option value="artist">By artist</option>
+	    <option value="genre">By genre</option>
+	    <option value="venue">By venue</option>
+	  </select>
+	  <ul>
+	    <li ng-repeat="concert in concerts | filter:search | orderBy: orderBy">
+			<a ui-sref="watch({id: concert.id})">
+			{{concert.artist}} Live at {{concert.venue}} {{concert.year}}<br/></a>
+	      	artist: {{concert.artist}}<br/>
+	      	genre: {{concert.genre}}<br/>
+	      	venue: {{concert.venue}}</br>
+	      	<hr>
+	    </li>
+	  </ul>
+	  <span>Total concerts: {{concerts.length}}</span>
+	</div>
 </div>

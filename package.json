@@ -4,6 +4,7 @@
   "description": "watch jazz live concerts online",
   "main": "index.js",
   "dependencies": {
+    "angular": "^1.6.0",
     "normalize.css": "^5.0.0"
   },
   "devDependencies": {

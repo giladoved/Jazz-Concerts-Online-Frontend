@@ -1,35 +1,52 @@
 (function() {
-	var app = angular.module('App', ['ngRoute'])
+	var app = angular.module('App', ['ui.router'])
 	.config(function($sceDelegateProvider, $locationProvider) {
-	   $sceDelegateProvider.resourceUrlWhitelist([
-	     'self',
-	     '*://www.youtube.com/**'
-	   ]);
-	   $locationProvider.html5Mode(true);
+	    $sceDelegateProvider.resourceUrlWhitelist([
+	    	'self',
+	    	'*://www.youtube.com/**'
+	    ]);
+
+		$locationProvider
+		  .html5Mode(false)
+		  .hashPrefix('!');
 	 })
-	.config(function($routeProvider) {
-	  $routeProvider
-	  .when('/watch/:id', {
-	    templateUrl : '/src/templates/pages/watch/index.html',
-	    controller: 'WatchCtrl',
-	    controllerAs: 'watch'
-	  })
-	  .when('/list/:type/:name', {
-	    templateUrl : '/src/templates/pages/list/index.html',
-	    controller: 'ListCtrl',
-	    controllerAs: 'list'
-	  })
-	  .when('/', {
-	  	templateUrl: '/src/templates/pages/home/index.html'
-	  })
-	  .otherwise({
-	  	redirectTo: '/'
-	  });
+	.config(function($stateProvider, $urlRouterProvider) {
+    	$urlRouterProvider.otherwise('/');
+    	$stateProvider
+        .state('home', {
+        	url: '/',
+        	templateUrl: '/src/templates/pages/home/index.html'
+        })
+        .state('list', {
+        	url: '/list/:type/:name',
+        	templateUrl : '/src/templates/pages/list/index.html',
+	    	controller: 'ListCtrl',
+	    	controllerAs: 'list'
+        })
+        .state('watch', {
+        	url: '/watch/:id',
+			templateUrl : '/src/templates/pages/watch/index.html',
+	    	controller: 'WatchCtrl',
+	    	controllerAs: 'watch'
+        })
+        .state('404', {
+        	template: '<h1 style="text-align: center;">Page not found</h1>'
+        });
 	});
 
-	app.controller('ListCtrl', function($routeParams) {
-		this.type = $routeParams.type;
-		this.name = $routeParams.name;
+	app.controller('ListCtrl', function($http, $scope, $stateParams) {
+		var type = $stateParams.type;
+		var name = $stateParams.name;
+
+		$scope.type = type;
+		$scope.name = name;
+
+		$scope.orderBy = type;
+		$scope.search = name;
+
+		$http.get('/concerts').then((res) => {
+			$scope.concerts = res.data;
+		});
 	});
 
 	app.controller('TracklistCtrl', function($scope) {
@@ -57,21 +74,16 @@
 		}
 	});
 
-	app.controller('WatchCtrl', function($scope, $routeParams) {
-		var id = $routeParams.id;
+	app.controller('WatchCtrl', function($http, $scope, $stateParams, $state) {
+		var id = $stateParams.id;
 		$scope.id = id;
-		// $scope.concert = getConcertById($routeParams.id);
 
-		$scope.concert = {
-				artist: "Robert Glasper Trio",
-				artists: ["Robert Glasper", "Derick Hodge", "Chris Dave"],
-				year: "2012",
-				festival: "Jazz a la Villette Festival",
-				venue: "Cite de la Musique",
-				city: "Paris, France",
-				id: id,
-				url: "http://www.youtube.com/embed/" + id + "?showinfo=0&rel=0"
-			};
+		var params = {'id': id}
+		$http.get('/concert', {params: params}).then((res) => {
+			$scope.concert = res.data;
+		}, (res) => {
+		  	$state.go('404');
+		});
 	});
 
 	app.controller('FeaturedCtrl', function($scope, $http) {
