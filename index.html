@@ -24,8 +24,9 @@
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
+			<li><a ui-sref="list">Search</a></li>
+			<li ng-controller="RandomCtrl as random"><a ui-sref="watch({id: random.id})">Random</a></li>
 			<li><a href="/">About</a></li>
-			<li><a href="/">Random</a></li>
 		</ul>
 	</nav>
 

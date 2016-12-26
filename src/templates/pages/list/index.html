@@ -6,6 +6,7 @@
 	    <option value="genre">By genre</option>
 	    <option value="venue">By venue</option>
 	  </select>
+	  <div class="total-count">Total concerts: {{filtered.length}}</div>
 	  <ul>
 	    <li ng-repeat="concert in concerts | filter:search | orderBy: orderBy as filtered">
 			<a ui-sref="watch({id: concert.id})">
@@ -16,6 +17,5 @@
 	      	<hr>
 	    </li>
 	  </ul>
-	  <span>Total concerts: {{filtered.length}}</span>
 	</div>
 </div>

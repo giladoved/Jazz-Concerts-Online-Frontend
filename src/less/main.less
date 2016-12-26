@@ -40,8 +40,9 @@ nav {
 			border-radius: 8px;
 			background: @dark-blue;
 
-			a {
+			a, a:visited {
 				color: @light-gray;
+				text-decoration: none;
 			}
 		}
 		li:hover {
@@ -94,6 +95,9 @@ hr {
 }
 
 .list {
+	.total-count {
+		margin: 5px 0 15px 0;
+	}
 	ul {
 		list-style-type: none;
 		padding-left: 0;
