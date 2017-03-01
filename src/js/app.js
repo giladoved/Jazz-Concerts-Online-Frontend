@@ -1,5 +1,7 @@
+/*jshint esversion: 6 */
+
 (function() {
-	var app = angular.module('App', ['ui.router'])
+	var app = angular.module('App', ['ui.router', 'ngYoutubeEmbed'])
 	.config(function($sceDelegateProvider, $locationProvider) {
 	    $sceDelegateProvider.resourceUrlWhitelist([
 	    	'self',
@@ -18,72 +20,56 @@
         	templateUrl: '/src/templates/pages/home/index.html'
         })
         .state('list', {
-        	url: '/list/:type/:name',
+        	url: '/list/:orderBy?/:q?',
         	templateUrl : '/src/templates/pages/list/index.html',
-	    	controller: 'ListCtrl',
-	    	controllerAs: 'list'
+	    	resolve: {
+	    		listService: function($http) {
+	    			return $http.get('/concerts');
+	    		}
+	    	},
+	    	controller: 'ListCtrl'
         })
         .state('watch', {
         	url: '/watch/:id',
 			templateUrl : '/src/templates/pages/watch/index.html',
+			resolve: {
+				watchService: function($http, $stateParams) {
+					var params = {'id': $stateParams.id};
+					return $http.get('/concert', {params: params});
+				}
+			},
 	    	controller: 'WatchCtrl',
 	    	controllerAs: 'watch'
+        })
+        .state('about', {
+        	template: '<h1 style="text-align: center;"> About page </h1>'
         })
         .state('404', {
         	template: '<h1 style="text-align: center;">Page not found</h1>'
         });
 	});
 
-	app.controller('ListCtrl', function($http, $scope, $stateParams) {
-		var type = $stateParams.type;
-		var name = $stateParams.name;
+	app.controller('ListCtrl', function(listService, $scope, $stateParams, $location, $state) {
+		var orderBy = $stateParams.orderBy;
+		var q = $stateParams.q;
 
-		$scope.type = type;
-		$scope.name = name;
+		$scope.orderBy = orderBy;
+		$scope.q = q;
 
-		$scope.orderBy = type;
-		$scope.search = name;
+		$scope.concerts = listService.data;
 
-		$http.get('/concerts').then((res) => {
-			$scope.concerts = res.data;
-		});
+		$scope.$watch('orderBy', function(value) {
+			$state.go('list', {orderBy: value}, {notify: false});
+	    });
+
+	    $scope.$watch('q', function(value) {
+	    	$state.go('list', {q: value}, {notify: false});
+	    });
 	});
 
-	app.controller('TracklistCtrl', function($scope) {
-		$scope.jumpVideo = function(timestamp) {
-			var timeParts = timestamp.split(':');
-			var hours, minutes, seconds;
-
-			if (timeParts.length == 3) {
-				hours = timeParts[0];
-				minutes = timeParts[1];
-				seconds = timeParts[2];
-			} else {
-				minutes = timeParts[0];
-				seconds = timeParts[1];
-			}
-
-			var totalSeconds = 0;
-			if (timeParts.length == 3) {
-				totalSeconds += hours * 60 * 60;
-			}
-			totalSeconds += minutes * 60;
-			totalSeconds += seconds;
-
-			console.log("Seeking to " + totalSeconds);
-		}
-	});
-
-	app.controller('WatchCtrl', function($http, $scope, $stateParams, $state) {
-		var id = $stateParams.id;
-		$scope.id = id;
-
-		var params = {'id': id}
-		$http.get('/concert', {params: params}).then((res) => {
-			$scope.concert = res.data;
-		}, (res) => {
-		  	$state.go('404');
-		});
+	app.controller('WatchCtrl', function($scope, $stateParams, watchService) {
+		$scope.id = $stateParams.id;
+		$scope.concert = watchService.data;
 	});
 
 	app.controller('FeaturedCtrl', function($scope, $http) {
@@ -108,6 +94,37 @@
 		$http.get('/recents').then((res) => {
 			this.recents = res.data;
 		});
+	});
+
+	app.controller('RandomCtrl', function($http) {
+	    $http.get('/random').then((res) => {
+			this.id = res.data;
+		});
+	});
+
+	app.controller('TracklistCtrl', function($scope, ngYoutubeEmbedService) {
+		$scope.jumpVideo = function(timestamp) {
+			var timeParts = timestamp.split(':');
+			var hours, minutes, seconds;
+
+			if (timeParts.length == 3) {
+				hours = timeParts[0];
+				minutes = timeParts[1];
+				seconds = timeParts[2];
+			} else {
+				minutes = timeParts[0];
+				seconds = timeParts[1];
+			}
+
+			var totalSeconds = 0;
+			if (timeParts.length == 3) {
+				totalSeconds += hours * 60 * 60;
+			}
+			totalSeconds += minutes * 60;
+			totalSeconds += seconds;
+
+			console.log("Seeking to " + totalSeconds);
+		};
 	});
 
 

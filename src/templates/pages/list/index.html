@@ -1,21 +1,24 @@
 <div class="list wrapper">
-	<div>
-	  <input type="text" ng-model="search"/>
+	<div class="search">
+	  <input type="text" ng-model="q"/>
+	  <label>Sort by: </label>
 	  <select ng-model="orderBy">
-	    <option value="artist">By artist</option>
-	    <option value="genre">By genre</option>
-	    <option value="venue">By venue</option>
+	    <option value="artist">artist</option>
+	    <option value="genre">genre</option>
+	    <option value="venue">venue</option>
 	  </select>
+	  <div class="total-count">Number of concerts: {{filtered.length}}</div>
+	  <br>
 	  <ul>
-	    <li ng-repeat="concert in concerts | filter:search | orderBy: orderBy">
-			<a ui-sref="watch({id: concert.id})">
-			{{concert.artist}} Live at {{concert.venue}} {{concert.year}}<br/></a>
-	      	artist: {{concert.artist}}<br/>
-	      	genre: {{concert.genre}}<br/>
-	      	venue: {{concert.venue}}</br>
-	      	<hr>
+	    <li ng-repeat="concert in concerts | filter:q | orderBy: orderBy as filtered">
+	    	<div class="result">
+				<a ui-sref="watch({id: concert.id})">
+				<span>{{concert.artist}} Live at {{concert.venue}} {{concert.year}}</span><br/></a>
+		      	<span ng-show="concert.artist">artist: {{concert.artist}}</span><br/>
+		      	<span ng-show="concert.genre">genre: {{concert.genre.toString()}}</span><br/>
+		      	<span ng-show="concert.venue">venue: {{concert.venue}}</span></br>
+	      	</div>
 	    </li>
 	  </ul>
-	  <span>Total concerts: {{concerts.length}}</span>
 	</div>
 </div>

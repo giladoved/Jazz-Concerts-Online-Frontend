@@ -12,6 +12,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
 	<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/angular.youtube-embed/1.7.8/ng-youtube-embed.min.js"></script>
 	<script src="src/js/app.js"></script>
 
 	<base href="/">
@@ -24,8 +25,9 @@
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
-			<li><a href="/">About</a></li>
-			<li><a href="/">Random</a></li>
+			<li><a ui-sref="list">Search</a></li>
+			<li ng-controller="RandomCtrl as random"><a ui-sref="watch({id: random.id})">Random</a></li>
+			<li><a ui-sref="about">About</a></li>
 		</ul>
 	</nav>
 

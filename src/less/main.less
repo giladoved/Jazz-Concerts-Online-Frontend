@@ -40,8 +40,9 @@ nav {
 			border-radius: 8px;
 			background: @dark-blue;
 
-			a {
+			a, a:visited {
 				color: @light-gray;
+				text-decoration: none;
 			}
 		}
 		li:hover {
@@ -63,6 +64,17 @@ hr {
 	text-align: center;
 	width: 50%;
 	margin: 0 auto;
+
+	.browse {
+		section {
+			margin-bottom: 70px;
+		}
+		h5 {
+			text-align: left;
+			margin-left: 10px;
+		}
+	}
+
 }
 
 .description {
@@ -94,8 +106,27 @@ hr {
 }
 
 .list {
+
+	.search {
+		padding: 10px 0;
+	}
+
+	.total-count {
+		margin: 5px 0 15px 0;
+	}
 	ul {
 		list-style-type: none;
 		padding-left: 0;
+	}
+	.result {
+		margin: 0 auto;
+		width: 55%;
+		text-align: left;
+		padding: 20px;
+		border-bottom: 1px solid black;
+
+		.title {
+			margin-bottom: 5px;
+		}
 	}
 }
