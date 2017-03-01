@@ -11,10 +11,12 @@
 <div class="description">
 	<div class="row">
   		<div class="info col-sm-7">
-  			<h4> Artists: </h4>
-			<ul>
-			    <li ng-repeat="artist in concert.artists">{{artist}}</li>
-			</ul>
+  		<div ng-show="concert.artists">
+        <h4> Artists: </h4>
+  			<ul>
+  			    <li ng-repeat="artist in concert.artists">{{artist}}</li>
+  			</ul>
+      </div>
 			<div ng-show="concert.year"><h4> Year: </h4><p> {{concert.year}} </p></div>
 			<div ng-show="concert.venue"><h4> Venue: </h4><p> {{concert.venue}} </p></div>
 			<div ng-show="concert.festival"><h4> Festival: </h4><p> {{concert.festival}} </p></div>
