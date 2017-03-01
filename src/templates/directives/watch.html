@@ -1,5 +1,13 @@
 <h3>{{concert.artist}} Live at {{concert.venue}} {{concert.year}}</h3>
-<div class="video embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" width="900" height="500" ng-src="{{concert.url}}" frameborder="0" allowfullscreen></iframe></div>
+<div class="video embed-responsive embed-responsive-4by3">
+<!-- <iframe class="embed-responsive-item" width="900" height="500" ng-src="{{concert.url}}" frameborder="0" allowfullscreen></iframe> -->
+<ng-youtube-embed
+    video="concert.url"
+    videoid="player"
+    enablejsapi="false"
+    >
+</ng-youtube-embed>
+</div>
 <div class="description">
 	<div class="row">
   		<div class="info col-sm-7">
@@ -15,7 +23,8 @@
   		<div class="tracklist col-sm-5"  ng-controller="TracklistCtrl as tracklist" ng-show="concert.tracklist">
   			<h4> Tracklist: </h4>
   			<ul>
-  				<li ng-repeat="trackItem in concert.tracklist"> <a ng-click="jumpVideo(trackItem[0])">{{trackItem[0]}}</a> - {{trackItem[1]}}</li>
+  				<!-- <li ng-repeat="trackItem in concert.tracklist"> <a ng-click="jumpVideo(trackItem[0])">{{trackItem[0]}}</a> - {{trackItem[1]}}</li> -->
+          <li ng-repeat="trackItem in concert.tracklist">{{trackItem[0]}} - {{trackItem[1]}}</li>
   			</ul>
   		</div>
   	</div>

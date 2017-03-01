@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 (function() {
-	var app = angular.module('App', ['ui.router'])
+	var app = angular.module('App', ['ui.router', 'ngYoutubeEmbed'])
 	.config(function($sceDelegateProvider, $locationProvider) {
 	    $sceDelegateProvider.resourceUrlWhitelist([
 	    	'self',
@@ -20,7 +20,7 @@
         	templateUrl: '/src/templates/pages/home/index.html'
         })
         .state('list', {
-        	url: '/list/:type?/:name?',
+        	url: '/list/:orderBy?/:q?',
         	templateUrl : '/src/templates/pages/list/index.html',
 	    	resolve: {
 	    		listService: function($http) {
@@ -49,17 +49,22 @@
         });
 	});
 
-	app.controller('ListCtrl', function(listService, $scope, $stateParams) {
-		var type = $stateParams.type;
-		var name = $stateParams.name;
+	app.controller('ListCtrl', function(listService, $scope, $stateParams, $location, $state) {
+		var orderBy = $stateParams.orderBy;
+		var q = $stateParams.q;
 
-		$scope.type = type;
-		$scope.name = name;
-
-		$scope.orderBy = type;
-		$scope.search = name;
+		$scope.orderBy = orderBy;
+		$scope.q = q;
 
 		$scope.concerts = listService.data;
+
+		$scope.$watch('orderBy', function(value) {
+			$state.go('list', {orderBy: value}, {notify: false});
+	    });
+
+	    $scope.$watch('q', function(value) {
+	    	$state.go('list', {q: value}, {notify: false});
+	    });
 	});
 
 	app.controller('WatchCtrl', function($scope, $stateParams, watchService) {
@@ -92,12 +97,12 @@
 	});
 
 	app.controller('RandomCtrl', function($http) {
-		$http.get('/random').then((res) => {
+	    $http.get('/random').then((res) => {
 			this.id = res.data;
 		});
 	});
 
-	app.controller('TracklistCtrl', function($scope) {
+	app.controller('TracklistCtrl', function($scope, ngYoutubeEmbedService) {
 		$scope.jumpVideo = function(timestamp) {
 			var timeParts = timestamp.split(':');
 			var hours, minutes, seconds;
